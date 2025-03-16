@@ -1,95 +1,64 @@
 "use client";
-import { useState } from 'react';
 import Link from 'next/link';
 
 export default function Home() {
-  const [skills, setSkills] = useState<string[]>([]);
-  const [customSkill, setCustomSkill] = useState('');
-  
-  const predefinedSkills = [
-    'React', 'Next.js', 'Node.js', 'TypeScript',
-    'Python', 'Java', 'Angular', 'Vue.js'
-  ];
-
-  const handleAddCustomSkill = () => {
-    if (customSkill && !skills.includes(customSkill)) {
-      setSkills([...skills, customSkill]);
-      setCustomSkill('');
-    }
-  };
-
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800">
-      <main className="max-w-4xl mx-auto px-4 py-8">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold mb-4">Choose Your Skills</h1>
-          <p className="text-gray-600 dark:text-gray-300">Select the skills you want to be interviewed for</p>
+    <div className="min-h-screen bg-gray-100 dark:bg-gray-900">
+      <header className="h-[60vh] bg-gradient-to-r from-indigo-600 to-blue-500 flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-5xl font-extrabold text-white drop-shadow-lg mb-4">
+            Welcome to Persist
+          </h1>
+          <p className="text-xl text-white drop-shadow-md mb-8">
+            Your Personal Development Journey Starts Here
+          </p>
+          <Link href="/skills">
+            <button className="bg-white text-indigo-600 font-semibold px-8 py-3 rounded-full shadow-md hover:bg-indigo-50 transition">
+              Get Started
+            </button>
+          </Link>
         </div>
+      </header>
 
-        <div className="space-y-8">
-          <section className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg">
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
-              {predefinedSkills.map((skill) => (
-                <button
-                  key={skill}
-                  onClick={() => !skills.includes(skill) && setSkills([...skills, skill])}
-                  className={`p-3 rounded-lg border ${
-                    skills.includes(skill)
-                      ? 'bg-blue-100 border-blue-500 text-blue-700'
-                      : 'border-gray-200 hover:border-blue-500'
-                  }`}
-                >
-                  {skill}
-                </button>
-              ))}
+      <main className="max-w-4xl mx-auto px-4 py-16">
+        <section className="bg-white dark:bg-gray-800 rounded-lg p-10 shadow-xl">
+          <h2 className="text-3xl font-bold text-gray-800 dark:text-gray-200 mb-8">
+            What We Offer
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="bg-indigo-50 dark:bg-indigo-900/20 rounded-xl p-6 shadow hover:shadow-lg transition">
+              <h3 className="text-2xl font-semibold text-indigo-700 dark:text-indigo-200 mb-4">
+                Skill Development
+              </h3>
+              <div className="flex flex-wrap gap-3">
+                {['Personal Growth', 'Leadership', 'Communication', 'Productivity'].map((skill) => (
+                  <span
+                    key={skill}
+                    className="px-4 py-1 bg-indigo-200 dark:bg-indigo-700/50 text-indigo-800 dark:text-indigo-100 rounded-full text-sm font-medium"
+                  >
+                    {skill}
+                  </span>
+                ))}
+              </div>
             </div>
 
-            <div className="flex gap-2 mb-6">
-              <input
-                type="text"
-                value={customSkill}
-                onChange={(e) => setCustomSkill(e.target.value)}
-                placeholder="Add custom skill"
-                className="flex-1 p-2 border rounded-md"
-              />
-              <button
-                onClick={handleAddCustomSkill}
-                className="px-4 py-2 bg-blue-600 text-white rounded-md"
-              >
-                Add
-              </button>
-            </div>
-
-            {skills.length > 0 && (
-              <div className="mb-6">
-                <h3 className="font-semibold mb-2">Selected Skills:</h3>
-                <div className="flex flex-wrap gap-2">
-                  {skills.map((skill) => (
-                    <span
-                      key={skill}
-                      className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm"
-                    >
-                      {skill}
-                    </span>
-                  ))}
+            <div className="bg-blue-50 dark:bg-blue-900/20 rounded-xl p-6 shadow hover:shadow-lg transition">
+              <h3 className="text-2xl font-semibold text-blue-700 dark:text-blue-200 mb-4">
+                Learning Paths
+              </h3>
+              <div className="space-y-4">
+                <div className="p-4 bg-white dark:bg-gray-700 rounded-md shadow-sm">
+                  <p className="font-semibold text-gray-800 dark:text-gray-200">
+                    Customized Learning Experience
+                  </p>
+                  <p className="text-sm text-gray-600 dark:text-gray-300">
+                    Track your progress • Set goals • Achieve more
+                  </p>
                 </div>
               </div>
-            )}
-
-            <div className="flex justify-end">
-              <Link
-                href="/interview-setup"
-                className={`px-6 py-2 rounded-md ${
-                  skills.length > 0
-                    ? 'bg-blue-600 text-white'
-                    : 'bg-gray-300 cursor-not-allowed'
-                }`}
-              >
-                Continue
-              </Link>
             </div>
-          </section>
-        </div>
+          </div>
+        </section>
       </main>
     </div>
   );
